@@ -112,7 +112,7 @@ class Belegungsplan extends AdminController
             
             if(isset($aqs[$k])){
                 // condition for adding project in AQ drop down 
-                $projektnv = (empty($aq['project']))? ' ' : ' ('.$aq['id'].')' ;
+                $projektnv = (empty($aq['project']))? ' ' : ' ('.$aq['project'].')' ;
                 
                 $optionsAQ .= '<option value="' . $aq['id'] . '">' . $aq['strabe'] . ' ' . $aq['hausnummer'] . ' ' . $aq['etage'] . ' ' . $k['flugel'] .' ' . $aq['schlaplatze'] .' ' . $aq['mobiliert'] .$projektnv.  ' </option>';
                 // Comma is added to filter unique Value below
