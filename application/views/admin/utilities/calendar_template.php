@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <?php echo render_select('user[]', $staffs, array('staffid', array('firstname', 'lastname')), 'Mitabeiter', '', array('required' => true, 'multiple' => true)); ?>
+                        <?php echo render_select('user', $staffs, array('staffid', array('firstname', 'lastname')), 'Mitabeiter', '', array('required' => true, 'multiple' => true)); ?>
 
                     </div>
                 </div>

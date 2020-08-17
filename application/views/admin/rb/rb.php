@@ -33,11 +33,11 @@
 
     var table_rb = $('.table-rb');
     var _table_api = initDataTable(table_rb, admin_url + 'rb/table', undefined, undefined, LeadsServerParams, [0, 'desc'], filterArray);
-    new $.fn.dataTable.FixedHeader( _table_api );
+    //new $.fn.dataTable.FixedHeader( _table_api ); moved for all tables 
 
 </script>
-<link herf="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.dataTables.min.css"></link>
+<!--link herf="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.dataTables.min.css"></link>
 <link herf="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css"></link>
-<link herf="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></link>
+<link herf="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></link-->
 </body>
 </html>
