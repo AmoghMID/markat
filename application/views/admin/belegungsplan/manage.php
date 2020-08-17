@@ -166,8 +166,14 @@
                                                             $occuped = $this->mieter_model->hasOccupations($mieter['id']);
                                                             $classAdd = $occuped ? "<i class='fa fa-check green'></i>" : "";
                                                             ?>
-                                                            <option data-content="<?php echo $classAdd . ' ' .$mieter['fullname'] . ' ' . $mieter['nachname'] . ' ' . $mieter['vorname'] . ' ' . $mieter['strabe_m'] . ' ' . $mieter['hausnummer_m'] ?>"
-                                                                    value="<?= $mieter['id'] ?>"><?php echo  $mieter['fullname'] . ' ' . $mieter['nachname'] . ' ' . $mieter['vorname'] . ' ' . $mieter['strabe_m'] . ' ' . $mieter['hausnummer_m'] ?>
+                                                            <?php $projektnv = ''; 
+                                                                if(empty($mieter['projektname'])==false) { 
+                                                                    $projektnv = ' ('.$mieter['projektname'].')';
+                                                                } 
+                                                            ?>
+
+                                                            <option data-content="<?php echo $classAdd . ' ' .$mieter['fullname'] . ' ' . $mieter['nachname'] . ' ' . $mieter['vorname'] . ' ' . $mieter['strabe_m'] . ' ' . $mieter['hausnummer_m'].$projektnv ?>"
+                                                                    value="<?= $mieter['id'] ?>"><?php echo  $mieter['fullname'] . ' ' . $mieter['nachname'] . ' ' . $mieter['vorname'] . ' ' . $mieter['strabe_m'] . ' ' . $mieter['hausnummer_m'].$projektnv ?>
                                                             </option>
 
                                                         <?php endforeach; ?>
@@ -205,13 +211,13 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 ">
-                                                <?php echo render_select('etage', $etage, array('etage', 'etage'), '', '', array('data-width' => '100%', 'data-none-selected-text' => 'Etage'), array(),'','efilter'); ?>
+                                                <?php echo render_select('etage', $etage1, array('etage', 'etage'), '', '', array('data-width' => '100%', 'data-none-selected-text' => 'Etage'), array(),'','efilter'); ?>
                                             </div>
                                             <div class="col-md-4 ">
-                                                <?php echo render_select('schlaplatze', $schlaplatze, array('schlaplatze', 'schlaplatze'), '', '', array('data-width' => '100%', 'data-none-selected-text' => 'Schlafplätze'), array(),'','sfilter'); ?>
+                                                <?php echo render_select('schlaplatze', $schlaplatze1, array('schlaplatze', 'schlaplatze'), '', '', array('data-width' => '100%', 'data-none-selected-text' => 'Schlafplätze'), array(),'','sfilter'); ?>
                                             </div>
                                             <div class="col-md-4 ">
-                                                <?php echo render_select('mobiliert', $mobiliert, array('mobiliert', 'mobiliert'), '', '', array('data-width' => '100%', 'data-none-selected-text' => 'Möbliert'), array(),'','mfilter'); ?>
+                                                <?php echo render_select('mobiliert', $mobiliert1, array('mobiliert', 'mobiliert'), '', '', array('data-width' => '100%', 'data-none-selected-text' => 'Möbliert'), array(),'','mfilter'); ?>
                                             </div>
                                         </div>
                                         <br>

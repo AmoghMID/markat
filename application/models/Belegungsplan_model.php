@@ -97,14 +97,14 @@ class Belegungsplan_model extends App_Model
             if (isset($data['belegungsplan_id']))
                 unset($data['belegungsplan_id']);
 
-/*
+
             //custom changes
-            if (isset($data['belegungsplan_id']))
-            unset($data['belegungsplan_id']);
-            if (isset($data['belegungsplan_id']))
-            unset($data['belegungsplan_id']);
-            if (isset($data['belegungsplan_id']))
-            unset($data['belegungsplan_id']);*/
+            if (isset($data['etage']))
+            unset($data['etage']);
+            if (isset($data['schlaplatze']))
+            unset($data['schlaplatze']);
+            if (isset($data['mobiliert']))
+            unset($data['mobiliert']);
 
 
             $data['belegt_b'] = to_sql_datedv($data['belegt_b']);

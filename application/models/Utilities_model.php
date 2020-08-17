@@ -114,9 +114,9 @@ class Utilities_model extends App_Model
         $is_staff_member = is_staff_member();
         $this->db->select('title,start,end,eventid,userid,color,public');
         // Check if is passed start and end date
-        $this->db->join(db_prefix() . 'event_rel_staff', db_prefix() . 'event_rel_staff.event_id=' . db_prefix() . 'events.eventid', 'left');
+        //$this->db->join(db_prefix() . 'event_rel_staff', db_prefix() . 'event_rel_staff.event_id=' . db_prefix() . 'events.eventid', 'left');
         $this->db->where('(start BETWEEN "' . $start . '" AND "' . $end . '")');
-        $this->db->where(db_prefix() . 'event_rel_staff.user_id', get_staff_user_id());
+        //$this->db->where(db_prefix() . 'event_rel_staff.user_id', get_staff_user_id());
         if ($is_staff_member) {
             $this->db->or_where('public', 1);
         }
@@ -137,7 +137,7 @@ class Utilities_model extends App_Model
         $end = $this->db->escape_str($end);
         $client_id = $this->db->escape_str($client_id);
         $contact_id = $this->db->escape_str($contact_id);
-
+        
         $is_admin = is_admin();
         if ($is_admin) {
             $is_admin = has_permission('calendar', '', 'edit');
@@ -233,6 +233,7 @@ class Utilities_model extends App_Model
                 array_push($data, $invoice);
             }
         }
+
         if (get_option('show_estimates_on_calendar') == 1 && !$ff || $ff && array_key_exists('estimates', $filters)) {
             $noPermissionsQuery = get_estimates_where_sql_for_staff(get_staff_user_id());
 
@@ -322,7 +323,8 @@ class Utilities_model extends App_Model
                 array_push($data, $proposal);
             }
         }
-
+        
+        // This module entering Task in data -- Amo
         if (get_option('show_tasks_on_calendar') == 1 && !$ff || $ff && array_key_exists('tasks', $filters)) {
             if ($client_data && !$has_contact_permission_projects) {
             } else {
@@ -367,6 +369,7 @@ class Utilities_model extends App_Model
                         $task['url'] = site_url('clients/project/' . $task['rel_id'] . '?group=project_tasks&taskid=' . $task['id']);
                     }
                     array_push($data, $task);
+
                 }
             }
         }
@@ -478,6 +481,7 @@ class Utilities_model extends App_Model
                 array_push($data, $_contract);
             }
         }
+
         //calendar_project
         if (get_option('show_projects_on_calendar') == 1 && !$ff || $ff && array_key_exists('projects', $filters)) {
             $this->load->model('projects_model');
@@ -525,8 +529,11 @@ class Utilities_model extends App_Model
                 array_push($data, $_project);
             }
         }
+// Below code creating error - Amogh 
+
         if (!$client_data && !$ff || (!$client_data && $ff && array_key_exists('events', $filters))) {
-            $events = $this->get_all_events($start, $end);
+            $events = $this->get_all_events($start, $end); // This query is creatin issue
+            //return array('hg calander data');        
             foreach ($events as $event) {
                 if ($event['userid'] != get_staff_user_id() && !$is_admin) {
                     $event['is_not_creator'] = true;
@@ -537,7 +544,8 @@ class Utilities_model extends App_Model
                 array_push($data, $event);
             }
         }
-
+        //print_r($data);
+        //array_push($data, '[{"date":"2020-08-15","number":"1","id":"1","clientid":"12","hash":"3d2e9085e07937283aea5e2f7140bf44","company":"Deutsche Marktfirma GmbH","_tooltip":"Rechnung - INV-000002 (Deutsche Marktfirma GmbH)","title":"INV-000001","color":"#FF6F00","url":"http:\/\/localhost\/markat\/admin\/invoices\/list_invoices\/1"},{"title":"dqsdsqdqsd...","id":"26","rel_name":null,"rel_id":null,"status":"4","date":"2020-08-29","_tooltip":"Aufgabe - dqsdsqdqsd...","color":"#03A9F4","onclick":"init_task_modal(26); return false","url":"#"},{"title":"dqsdsqdqsd...","id":"27","rel_name":null,"rel_id":null,"status":"1","date":"2020-08-29","_tooltip":"Aufgabe - dqsdsqdqsd...","color":"#989898","onclick":"init_task_modal(27); return false","url":"#"}]');
         return hooks()->apply_filters('calendar_data', $data, [
             'start' => $start,
             'end' => $end,
